@@ -1,9 +1,7 @@
 nbproject
 nbproject/*
-config.php
 template/cache/*
 template/compile/*
-vendor/
 # Build results
 [Dd]ebug/
 [Rr]elease/
