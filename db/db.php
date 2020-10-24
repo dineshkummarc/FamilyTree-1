@@ -33,11 +33,13 @@ class db {
             $this->connection = mysqli_connect($host, $username, $password);
             if ($this->connection == false) {
                 trigger_error("Cannot connect to database", E_USER_ERROR); //report error in case of failure
+				echo "Cannot connect to database. connection info: " . mysqli_get_host_info($connection);
                 return false;
 
                 if (!is_null($database)) {
                     if (!mysqli_select_db($database)) {
                         trigger_error("Cannot Select database.", E_USER_ERROR);
+						echo "Cannot Select database. connection info: " . mysqli_get_host_info($connection);
                         return false;
                     }
                 }
@@ -54,6 +56,7 @@ class db {
     function select_db($name) {
         if (!mysqli_select_db($this->connection, $name)) {
             trigger_error("Cannot Select Database", E_USER_ERROR);
+			echo "Cannot select database. connection info: " . mysqli_get_host_info($connection);
             return false;
         }
     }
@@ -80,6 +83,7 @@ class db {
         } else {
             //Forgot to establish connection
             trigger_error("Establish Connection to database before executing query", E_USER_ERROR);
+			echo "connection info: " . mysqli_get_host_info($connection);
             return false;
         }
     }
@@ -111,6 +115,7 @@ class db {
             return mysqli_fetch_array($query);
         } else {
             trigger_error("Invalid Query resource provided", E_USER_NOTICE);
+			echo "Invalid Query resource provided. connection info: " . mysqli_get_host_info($connection);
             return false;
         }
     }
@@ -132,6 +137,7 @@ class db {
             return $finalarray;
         } else {
             trigger_error("Invalid Query resource provided", E_USER_NOTICE);
+			echo "Invalid Query resource provided. connection info: " . mysqli_get_host_info($connection);
             return false;
         }
     }
